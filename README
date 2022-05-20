@@ -1,0 +1,19 @@
+
+Just flask hello world in docker with prometheus monitoring and grafana graphs.
+
+== Dependencies ==
+docker
+docker-compose
+
+== How to use ==
+# In console execute
+https://github.com/q53/hello-world
+cd hello-world
+# 
+# WARNING
+# Next command will setup a network with 192.168.254.0/24 address space.
+# Ensure it will not overlayed with your current networks.
+# 
+# The flask app will be availible on port 80, graphana on port 3000
+docker-compose up -d
+
