@@ -14,7 +14,7 @@ endpoints = ("", "-/healthy", "-/ready")
 
 @app.route("/")
 def hello_world():
-    return "Hello world",200
+    return "Hello, world!",200
 
 
 @app.route("/-/healthy")
