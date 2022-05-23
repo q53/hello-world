@@ -2,18 +2,22 @@
 Just flask hello world in docker with prometheus monitoring and grafana graphs.
 
 == Dependencies ==
-docker
-docker-compose
+1. If you are going to run in docker:
+ - make
+ - docker
+ - docker-compose
+2. If you are going to deploy in kubernetes:
+ - make
+ - minikube (tested)
+  or
+ - kubectl with access to running cluster (untested)
+
 
 == How to use ==
 # In console execute
 git clone https://github.com/q53/hello-world
 cd hello-world
-# 
-# WARNING
-# Next command will setup a network with 192.168.254.0/24 address space.
-# Ensure it will not overlayed with your current networks.
-# 
-# The flask app will be availible on port 80, grafana on port 3000
-docker-compose up -d
+make
+# follow the help message
+
 

@@ -1,0 +1,44 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: hello-world
+      app: grafana
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        project: hello-world
+        app: grafana
+    spec:
+      containers:
+        - image: docker.io/dockerq53/grafana:latest
+          name: grafana
+          ports:
+            - containerPort: 3000
+          resources:
+#            limits:
+#              memory: "512Mi"
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: grafana
+spec:
+    clusterIP: 10.96.254.113
+    selector:
+        project: hello-world
+        app: grafana
+    ports:
+      - port: 3000
+        protocol: TCP
+        targetPort: 3000
+
+

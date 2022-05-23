@@ -1,0 +1,44 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: hello-world
+      app: prometheus
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        project: hello-world
+        app: prometheus
+    spec:
+      containers:
+        - image: docker.io/dockerq53/prometheus:latest
+          name: prometheus
+          ports:
+            - containerPort: 9090
+          resources:
+            limits:
+            #  memory: "1073741"
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: prometheus
+spec:
+    clusterIP: 10.96.254.111
+    selector:
+        project: hello-world
+        app: prometheus
+    ports:
+      - port: 9090
+        protocol: TCP
+        targetPort: 9090
+
+

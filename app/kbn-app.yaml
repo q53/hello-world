@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: hello-world
+      app: app
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        project: hello-world
+        app: app
+    spec:
+      containers:
+        - image: docker.io/dockerq53/app:latest
+          name: app
+          ports:
+            - containerPort: 5000
+          resources:
+            limits:
+            #  memory: "1073741"
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: app 
+spec:
+    clusterIP: 10.96.254.112
+    selector:
+        project: hello-world
+    ports:
+      - port: 5000
+        protocol: TCP
+        targetPort: 5000
+
+
